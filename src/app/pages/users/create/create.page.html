@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-form [user]="user" [title]="'Create a new user'" [create]="true" (userOutput)="submitForm($event)"></app-form>
+</ion-content>

@@ -1,0 +1,58 @@
+<ion-card>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12">
+          <img alt="Avatar User"
+            [src]="user.photo && user.photo.formats.thumbnail.url ? 'http://192.168.101.15:1337' + user.photo.formats.thumbnail.url : '../assets/no-photo.png'" />
+        </ion-col>
+        <ion-col size="12">
+          <ion-label>{{ title }}</ion-label>
+        </ion-col>
+        <hr class="line-divisor">
+      </ion-row>
+      <ion-row>
+        <form [formGroup]="formUser" class="ion-padding" (ngSubmit)="submitForm()">
+          <ion-item>
+            <ion-input label="Name" labelPlacement="floating" type="text" formControlName="username"></ion-input>
+          </ion-item>
+          <div class="ion-text-center valid-message"
+            *ngIf="formUser.controls['username'].invalid && (formUser.controls['username'].dirty || formUser.controls['username'].touched)">
+            <div *ngIf="formUser.controls['username'].errors?.['required']">
+              Name is required.
+            </div>
+          </div>
+          <ion-item>
+            <ion-input label="Email" labelPlacement="floating" type="email" formControlName="email"></ion-input>
+          </ion-item>
+          <div class="ion-text-center valid-message" [ngClass]="edit ? 'end-message' : ''"
+            *ngIf="formUser.controls['email'].invalid && (formUser.controls['email'].dirty || formUser.controls['email'].touched)">
+            <div *ngIf="formUser.controls['email'].errors?.['required']">
+              Email is required.
+            </div>
+            <div *ngIf="formUser.controls['email'].errors?.['email']">
+              Email is not valid.
+            </div>
+          </div>
+          <ion-item *ngIf="create">
+            <ion-input label="Passowrd" labelPlacement="floating" type="password"
+              formControlName="password"></ion-input>
+          </ion-item>
+          <div class="ion-text-center valid-message" [ngClass]="create ? 'end-message' : ''"
+            *ngIf="create && formUser.controls['password'].invalid && (formUser.controls['password'].dirty || formUser.controls['password'].touched)">
+            <div *ngIf="formUser.controls['password'].errors?.['required']">
+              Passowrd is required.
+            </div>
+            <div *ngIf="create && formUser.controls['password'].errors?.['minlength']">
+              Passowrd must be at least 6 characters long.
+            </div>
+          </div>
+          <div class="ion-text-center">
+            <ion-button type="submit" color="tertiary" [disabled]="formUser.invalid"><ion-icon name="create-outline"></ion-icon>{{ edit ?
+              '&nbsp;Update' : '&nbsp;Create'}}</ion-button>
+          </div>
+        </form>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

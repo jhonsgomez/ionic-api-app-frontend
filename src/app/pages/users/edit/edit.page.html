@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-form [user]="user" [title]="'[ #' + user.id + ' ] ' + user.username" [edit]="true"
+    (userOutput)="submitForm($event)"></app-form>
+</ion-content>
